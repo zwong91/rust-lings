@@ -1,0 +1,26 @@
+[workspace]
+
+members = [
+  # tests
+  "code/lifetime",
+  "code/strtok",
+  "code/gp",
+  "code/primitives",
+  "code/network",
+  "code/tokio-server",
+  "code/snappy-test",
+  "code/cpu-count",
+  "code/pyo3-test",
+  "code/simple_asm",
+
+  # live coding
+  "live_coding/hello_world",
+  "live_coding/training_code",
+  "live_coding/web2image",
+  "live_coding/kv",
+  "live_coding/pow",
+
+  # intro to crates
+  "live_coding/axum-live",
+  "live_coding/prost-live",
+]
