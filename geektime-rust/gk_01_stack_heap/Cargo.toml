@@ -2,6 +2,7 @@
 name = "stack_heap"
 version = "0.1.0"
 edition = "2021"
+description = "内存-栈、堆: 栈上存放的数据是静态的，静态大小，静态生命周期；堆上存放的数据是动态的，动态大小，动态生命周期"
 
 [[bin]]
 name = "error"

@@ -62,7 +62,7 @@ fn main() {
     bar();
 
     // 在堆上，一块新的内存被分配出来，并把 helloworld 逐个字节拷贝过去 memcpy
-    // ptr len  cap
+    //胖指针（fat pointer） ptr len  cap
     let hello = "hello world".to_string();
 
 
