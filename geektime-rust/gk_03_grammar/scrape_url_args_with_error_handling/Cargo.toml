@@ -1,5 +1,5 @@
 [package]
-name = "scrape_url_args"
+name = "scrape_url_args_with_error_handling"
 version = "0.1.0"
 edition = "2021"
 

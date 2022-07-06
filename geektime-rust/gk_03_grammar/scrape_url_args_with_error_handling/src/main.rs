@@ -1,3 +1,4 @@
+// 从你第一个Rust程序开始  ./scrape_url_args_with_error_handling  https://www.rust-lang.org  rust.md
 use std::fs;
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     for arg in std::env::args() {
@@ -21,6 +22,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     fs::write(output, md.as_bytes())?;
     println!("Converted markdown has been saved in {}.", output);
+
 
     Ok(())
 }

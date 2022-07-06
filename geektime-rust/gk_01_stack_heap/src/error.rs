@@ -47,7 +47,8 @@ fn main() {
     let name = "HelloWorld".to_string();
     // 隐含着线程不安全的访问, 对于编译错误，Rust 编译器会给出详细的错误原因，并给出建议的修复方法
     // 当前线程持有的变量 name 可能在新启动的线程使用之前就被释放，发生 use after free
-    std::thread::spawn( || {
+    // std::thread::spawn( || {
+    std::thread::spawn( move || {
         println!("hello1 {}", name);
     });
 }

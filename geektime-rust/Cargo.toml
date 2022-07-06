@@ -3,9 +3,7 @@
 members = [
   "gk_01_stack_heap",
   "gk_02_concepts",
-  "gk_03_grammar/scrape_url",
-  "gk_03_grammar/scrape_url_args",
-  "gk_03_grammar/scrape_url_with_error_handling",
+  "gk_03_grammar/scrape_url_args_with_error_handling",
   "gk_04_httpie",
   "gk_05_thumbor",
   "gk_06_queryer/queryer",
