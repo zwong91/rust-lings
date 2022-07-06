@@ -1,3 +1,5 @@
+// 控制流程  if 和 loop / while / for
+// 计算数列中下一个数的代码在三个函数中不断重复。这不符合 DRY（Don’t Repeat Yourself）原则, 抽离出来函数
 fn fib_loop(n: u8) {
     let mut a = 1;
     let mut b = 1;

@@ -1,4 +1,5 @@
 fn main() {
+    // 字符串字面量 into方法? 这中间经历了什么过程?
     let data: String = "hello world".into();
 
     let s1: &str = &data;

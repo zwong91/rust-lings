@@ -1,3 +1,4 @@
+// 聊天服务的数据结构  逻辑或
 #[derive(Debug)]
 enum Gender {
     #[allow(dead_code)]
@@ -6,6 +7,9 @@ enum Gender {
     Male = 2,
 }
 
+// 逻辑与
+//元组结构体。它的域都是匿名的，可以用索引访问
+// Clone 让数据结构可以被复制，而 Copy 则让数据结构可以在参数传递的时候自动按字节拷贝
 #[derive(Debug, Copy, Clone)]
 struct UserId(u64);
 
@@ -26,6 +30,7 @@ struct Topic {
     owner: UserId,
 }
 
+// 定义聊天室中可能发生的事件
 #[derive(Debug)]
 #[allow(dead_code)]
 enum Event {

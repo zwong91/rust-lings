@@ -1,3 +1,7 @@
+/* 默认变量不可变是一个很重要的特性，它符合最小权限原则（Principle of Least Privilege），有助于我们写出健壮且正确的代码。
+
+*/ 
+
 const PI: f64 = 3.1415926;
 static V: Vec<u8> = Vec::new();
 
@@ -13,6 +17,7 @@ fn where_is_pi() {
     );
 }
 
+// 条件编译
 #[cfg(test)]
 mod tests {
     use super::*;
