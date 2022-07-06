@@ -41,7 +41,41 @@
 
 泛型编程通过参数化让数据结构像函数一样延迟绑定，提升其通用性，类型的参数可以用
 接口约束，使类型满足一定的行为
+Rust 在处理泛型函数的时候会做单体化，泛型函数里每个用到的类
+型会编译出一份代码，这也是为什么在编译的时候 Rust 编译速度如此缓慢
 
+系统级语言, 不能有运行时?
+Rust 对标 C/C++ ， 要求不能有运行时如 Tokio，都是第三方库， 不在语言核心中
+Rust 和 C/C++ 都是编译成机器码，直接面对具体的 CPU 架构。所以 Rust 代码
+需要为每个平台单独编译，这是它和 Java/DotNet 等语言的主要区别；但是像 golang 这样的语
+言，它也直接编译成机器码，但 golang，即便一个最简单的 hello world，编译出来的代码也包
+含了一个庞大的运行时，处理调度，GC 等工作。Rust 没有这些额外的运行时
+
+
+学习 Rust 的过程，就能让你成为一个更好的程序员
+
+Rust book
+Deref trait ???
+Rust does deref coercion when it finds types and trait implementations in thress cases:
+
+From &T to &U when T: Deref<Target=U>
+From &mut T to &mut U when T:DerefMut<Target=U>
+From &mut T to &U when T: Deref<Target=U>
+
+Rust 死灵书（The Rustonomicon）
+docs.rs 
+《Rust 编程之道》
+Rust 语言开源杂志
+Beginner’s Series to: Rust
+JonGjengset https://www.youtube.com/c/JonGjengset   Rust for Rustaceans / Rust in Motion / Rust in Action
+
+程序君的 Rust 培训
+cheats.rs
+https://docs.google.com/presentation/d/1q-c7UAyrUlM-eZyTo1pd8SZ0qwA_wYxmPZVOQkoDmH4/edit#slide=id.p
+
+Rust为python造轮子
+https://github.com/PyO3/pyo3
+https://github.com/pola-rs/polars
 
 Q & A:
 1. 有一个指向某个函数的指针，如果将其解引用成一个列表，然后往列表中插入一个元
