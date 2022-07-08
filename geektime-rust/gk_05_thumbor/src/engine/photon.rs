@@ -1,3 +1,5 @@
+use std::io::Cursor;
+
 use super::{Engine, SpecTransform};
 use crate::pb::*;
 use anyhow::Result;
@@ -117,6 +119,6 @@ fn image_to_buf(img: PhotonImage, format: ImageOutputFormat) -> Vec<u8> {
     let dynimage = DynamicImage::ImageRgba8(img_buffer);
 
     let mut buffer = Vec::with_capacity(32768);
-    dynimage.write_to(&mut buffer, format).unwrap();
+    dynimage.write_to(&mut Cursor::new(&mut buffer), format).unwrap();
     buffer
 }

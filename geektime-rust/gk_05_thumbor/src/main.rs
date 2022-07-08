@@ -1,9 +1,8 @@
 use anyhow::Result;
 use axum::{
     extract::{Extension, Path},
-    handler::get,
     http::{HeaderMap, HeaderValue, StatusCode},
-    Router,
+    Router, routing::get, error_handling::HandleErrorLayer, BoxError,
 };
 use bytes::Bytes;
 use image::ImageOutputFormat;
@@ -51,6 +50,7 @@ async fn main() {
         .route("/image/:spec/:url", get(generate))
         .layer(
             ServiceBuilder::new()
+                .layer(HandleErrorLayer::new(handle_error))
                 .load_shed()
                 .concurrency_limit(1024)
                 .timeout(Duration::from_secs(10))
@@ -69,6 +69,8 @@ async fn main() {
         .await
         .unwrap();
 }
+
+async fn handle_error(_: BoxError) {}
 
 // basic handler that responds with a static string
 async fn generate(
