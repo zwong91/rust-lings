@@ -20,7 +20,8 @@ clap = { version = "3", features = ["derive"] } # 命令行解析
 colored = "2" # 命令终端多彩显示
 jsonxf = "1.1" # JSON pretty print 格式化
 mime = "0.3" # 处理 mime 类型
-# reqwest 默认使用 openssl，有些 linux 用户如果没有安装好 openssl 会无法编译，这里我改成了使用 rustls
+# reqwest 默认使用 openssl，有些 linux 用户如果没有安装好 openssl 会无法编译，这里我改成了使用 rustls, 其内部使用 ring 这个加解密库
+# reqwest 直接支持 HTTPS  一系列加密库 https://github.com/dalek-cryptography
 reqwest = { version = "0.11", default-features = false, features = ["json", "rustls-tls"] } # HTTP 客户端
 tokio = { version = "1", features = ["full"] } # 异步处理库
-syntect = "4"
+syntect = "5" # 语法高亮库, 支持几乎所有语言和文本格式

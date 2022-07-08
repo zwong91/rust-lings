@@ -6,7 +6,7 @@ use reqwest::{header, Client, Response, Url};
 use std::{collections::HashMap, str::FromStr};
 use syntect::{
     easy::HighlightLines,
-    highlighting::{Style, ThemeSet},
+    highlighting::{ThemeSet},
     parsing::SyntaxSet,
     util::{as_24_bit_terminal_escaped, LinesWithEndings},
 };
@@ -41,6 +41,9 @@ struct Get {
     #[clap(parse(try_from_str = parse_url))]
     url: String,
 }
+
+// 结构体里的url直接用url库里的Url类型就行了，用String还得自己检查一遍
+// 可以直接用 Url，但在传给 reqwest 时需要 to_string 或者 clone 一下
 
 // post 子命令。需要输入一个 url，和若干个可选的 key=value，用于提供 json body
 
@@ -81,7 +84,9 @@ impl FromStr for KvPair {
     }
 }
 
+/// clap 允许你为每个解析出来的值添加自定义的解析函数, 通过实现额外的验证函数和 trait 来完成的
 /// 因为我们为 KvPair 实现了 FromStr，这里可以直接 s.parse() 得到 KvPair
+/// 高度可复用且彼此独立，并不用修改主流程 符合软件开发的开闭原则（Open-Closed Principle）
 fn parse_kv_pair(s: &str) -> Result<KvPair> {
     s.parse()
 }
@@ -153,6 +158,18 @@ fn get_content_type(resp: &Response) -> Option<Mime> {
         .map(|v| v.to_str().unwrap().parse().unwrap())
 }
 
+// cargo flamegraph 性能测试
+// tokei src/main.rs 代码行数统计 => Rust 拥有强大的表现力, 简洁的背后意味着大量的抽象
+// excalidraw 画图
+// cargo install cargo-edit
+// cargo add anyhow colored jsonxf mime
+// cargo add clap --allow-prerelease
+
+// cargo build --quiet && ../target/debug/httpie post  https://httpbin.org/post  a=1 b=2
+// or  cargo run -- post https://httpbin.org/post a=1 b=2
+
+// Rust 下的方法可以消费 self（第一个参数是 self 而非 &self），其它大多数语言只能消费 &self
+
 /// 程序的入口函数，因为在 http 请求时我们使用了异步处理，所以这里引入 tokio
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -161,6 +178,7 @@ async fn main() -> Result<()> {
     // 为我们的 http 客户端添加一些缺省的 HTTP 头
     headers.insert("X-POWERED-BY", "Rust".parse()?);
     headers.insert(header::USER_AGENT, "Rust Httpie".parse()?);
+    // 生成一个 HTTP 客户端
     let client = reqwest::Client::builder()
         .default_headers(headers)
         .build()?;
@@ -179,9 +197,10 @@ fn print_syntect(s: &str, ext: &str) {
     let syntax = ps.find_syntax_by_extension(ext).unwrap();
     let mut h = HighlightLines::new(syntax, &ts.themes["base16-ocean.dark"]);
     for line in LinesWithEndings::from(s) {
-        let ranges: Vec<(Style, &str)> = h.highlight(line, &ps);
-        let escaped = as_24_bit_terminal_escaped(&ranges[..], true);
-        print!("{}", escaped);
+        if let Ok(ranges) = h.highlight_line(line, &ps) {
+            let escaped = as_24_bit_terminal_escaped(&ranges[..], true);
+            print!("{}", escaped);
+        }
     }
 }
 

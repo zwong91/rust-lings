@@ -19,8 +19,11 @@ fn square(value: i32) -> i32 {
 fn cube(value: i32) -> i32 {
     value * value * value
 }
-// 缺省返回值 unit类型
+/*
+缺省返回值 unit类型
+*/
 fn main() {
+    println!("main: {:p}", main as *const ());
     println!("apply square: {}", apply(2, square));
     println!("apply cube: {}", apply(2, cube));
 }
