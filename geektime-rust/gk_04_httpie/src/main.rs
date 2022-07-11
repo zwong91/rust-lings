@@ -158,6 +158,8 @@ fn get_content_type(resp: &Response) -> Option<Mime> {
         .map(|v| v.to_str().unwrap().parse().unwrap())
 }
 
+// https://github.com/ducaale/xh   xh 工具
+
 // cargo flamegraph 性能测试
 // tokei src/main.rs 代码行数统计 => Rust 拥有强大的表现力, 简洁的背后意味着大量的抽象
 // excalidraw 画图

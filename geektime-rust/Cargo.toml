@@ -7,6 +7,7 @@ members = [
   "gk_03_grammar/scrape_url_args_with_error_handling",
   "gk_04_httpie",
   "gk_05_thumbor",
+  #"gk_06_queryer/data-viewer/src-tauri",
   "gk_06_queryer/queryer",
   "gk_06_queryer/queryer-js",
   "gk_06_queryer/queryer-py",

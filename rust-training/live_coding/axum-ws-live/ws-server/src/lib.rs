@@ -139,6 +139,7 @@ async fn handle_message(msg: Msg, state: Arc<State>) {
             }
             if let Some(v) = state.room_users.get_mut(&msg.room) {
                 v.remove(&msg.username);
+                // fixed dead lock
                 if v.is_empty() {
                     drop(v);
                     state.room_users.remove(&msg.room);

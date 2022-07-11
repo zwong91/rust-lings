@@ -88,6 +88,8 @@ where
     }
 }
 
+// httpie post "http://localhost:8000/login" email=2@b.com password=secret
+// httpie post "http://localhost:8000/todos" title=hello "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwibmFtZSI6IlR5ciBDaGVuIiwiZXhwIjoxNjQ1NDAyODkxfQ.3IIMcTmmtkz-4kaIHw5gIHXz-mhKXH-nrjxxLNNRYls"
 #[tokio::main]
 async fn main() {
     let store = TodoStore {
